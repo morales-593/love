@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 LoveBox - Regalos Digitales por $10</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', 'Segoe UI', cursive;
+        }
+
+        :root {
+            --primary: #ff4081;
+            --secondary: #f50057;
+            --accent: #ff80ab;
+            --dark: #880e4f;
+            --light: #fff5f8;
+            --shadow: 0 10px 30px rgba(255, 64, 129, 0.3);
+        }
+
+        body {
+            background: linear-gradient(45deg, #fff0f5, #ffe6ee, #fff5f8);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="20" font-size="20">💝</text></svg>'), auto;
+        }
+
+        /* ANIMACIONES DE CORAZONES FLOTANTES */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            color: var(--primary);
+            opacity: 0;
+            animation: floatHeart 20s infinite linear;
+            filter: drop-shadow(0 0 5px rgba(255, 64, 129, 0.5));
+        }
+
+        /* BANNER PROMOCIONAL */
+        .promo-banner {
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            animation: slideBanner 20s infinite linear;
+        }
+
+        .promo-banner span {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            padding: 20px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background: var(--light);
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 64, 129, 0.3);
+        }
+
+        .logo-text h1 {
+            font-size: 2rem;
+            color: var(--dark);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 60px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5);
+            animation: rubberBand 2s infinite;
+        }
+
+        .hero h2 span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h2 span::after {
+            content: '✨';
+            position: absolute;
+            right: -30px;
+            top: -10px;
+            animation: spin 3s infinite linear;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(255, 64, 129, 0.3);
+            animation: float 3s infinite ease-in-out;
+        }
+
+        /* PRODUCTOS */
+        .products-section {
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            padding: 0 20px;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            z-index: 1;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s;
+            position: relative;
+            border: 3px solid transparent;
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        .product-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .product-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .product-card:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 64, 129, 0.4);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            min-height: 90px;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 2px 2px 0 rgba(255, 64, 129, 0.1);
+        }
+
+        .buy-now-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .buy-now-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        }
+
+        /* WHATSAPP SECTION */
+        .whatsapp-section {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            padding: 60px 5%;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .whatsapp-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            background: white;
+            color: #25D366;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-btn {
+            background: white;
+            color: #25D366;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px auto;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* TESTIMONIOS */
+        .testimonials {
+            background: linear-gradient(135deg, #fff0f5, #ffe6ee);
+            padding: 60px 5%;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin: 20px;
+            position: relative;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-hearts {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* ANIMACIONES CSS */
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideBanner {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes rubberBand {
+            0% { transform: scale(1); }
+            30% { transform: scaleX(1.25) scaleY(0.75); }
+            40% { transform: scaleX(0.75) scaleY(1.25); }
+            60% { transform: scaleX(1.15) scaleY(0.85); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* EFECTOS ESPECIALES */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 9997;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-card {
+                animation: floatCard 8s ease-in-out infinite;
+            }
+            
+            .whatsapp-number {
+                font-size: 1.8rem;
+                padding: 12px 20px;
+            }
+            
+            .whatsapp-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .buy-now-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .price {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- EFECTOS DE FONDO -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+
+    <!-- BANNER PROMOCIONAL -->
+    <div class="promo-banner">
+        <span>🔥 ¡4 REGALOS ESPECIALES POR SOLO $10 CADA UNO! 🔥</span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                <div class="logo-text">
+                    <h1>LoveBox Digital</h1>
+                    <p>Regalos de amor que duran para siempre 💝</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>¡Sorprende a tu amor <span>por solo $10</span>! ✨</h2>
+            <p>Crea momentos inolvidables con regalos digitales personalizados. Perfectos para San Valentín, aniversarios o simplemente porque sí.</p>
+            
+            <div class="hero-highlight">
+                <i class="fas fa-star"></i> ¡CADA REGALO SOLO $10! <i class="fas fa-star"></i>
+            </div>
+            
+            <div style="margin-top: 30px; font-size: 0.9rem; color: #777;">
+                <i class="fas fa-bolt"></i> Entrega inmediata · <i class="fas fa-edit"></i> 100% Personalizable · <i class="fas fa-heart"></i> Amor garantizado
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="products-section">
+        <div class="section-title">
+            <h2>💖 Nuestros 4 Regalos Especiales</h2>
+        </div>
+        
+        <div class="products-grid" id="products-grid">
+            <!-- Los 4 productos se cargan dinámicamente -->
+        </div>
+    </section>
+
+    <!-- WHATSAPP SECTION -->
+    <section class="whatsapp-section">
+        <div class="whatsapp-content">
+            <div class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">¡Contáctame Directamente!</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                ¿Te gusta algún regalo? ¡Escríbeme por WhatsApp y lo personalizo para ti!
+            </p>
+               
+            <a href="https://wa.me/593993531735?text=¡Hola!%20Vi%20tus%20regalos%20de%20amor%20por%20$10%20y%20me%20interesa%20comprar" 
+               target="_blank" 
+               class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> ESCRIBIR POR WHATSAPP
+            </a>
+            
+            <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.9;">
+                <i class="fas fa-clock"></i> Disponible de 9:00 AM a 10:00 PM<br>
+                <i class="fas fa-bolt"></i> Respuesta en menos de 10 minutos
+            </p>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2 style="background: transparent; color: var(--dark);">💌 Lo que dicen los enamorados</h2>
+        </div>
+        
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    "¡La LovePage personalizada fue increíble! Por solo $10 hice el regalo más especial del mundo. Mi novia lloró de la emoción cuando la vio."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CP</div>
+                    <div>
+                        <div style="font-weight: bold; color: var(--dark);">Carlos & Paola</div>
+                        <div style="color: #777; font-size: 0.9rem;">Compró la LovePage</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    "El Juego del Amor fue perfecto para nuestro aniversario. Nos reímos mucho y descubrimos cosas nuevas el uno del otro. ¡Por solo $10!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MA</div>
+                    <div>
+                        <div style="font-weight: bold; color: var(--dark);">María & Andrés</div>
+                        <div style="color: #777; font-size: 0.9rem;">2 años juntos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-hearts">💝 💝 💝</div>
+            <h2 style="margin-bottom: 20px;">¡No esperes más para demostrar tu amor!</h2>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                Cada regalo digital es único, personalizado y creado con amor.
+            </p>
+            
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin: 30px auto; max-width: 500px;">
+                <div style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;">
+                    <i class="fab fa-whatsapp"></i> Contáctame en WhatsApp:
+                </div>
+                <div style="font-size: 1.8rem; font-weight: bold; color: #25D366;">
+                    0993531735
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                © 2024 LoveBox Digital - Todos los regalos a $10<br>
+                WhatsApp: 0993531735 - ¡Haz tu pedido ahora!
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ========== CONFIGURACIÓN ==========
+        const WHATSAPP_NUMBER = "0993531735";
+        const PRODUCT_PRICE = 10;
+        let loveMessages = [
+            "💖 ¡Cada regalo solo $10!",
+            "✨ Demuestra tu amor sin gastar mucho",
+            "🌹 El amor verdadero no tiene precio, ¡pero nuestros regalos sí!",
+            "💌 Por solo $10 puedes hacer feliz a tu pareja",
+            "🎁 ¡La mejor inversión en amor!",
+            "🌟 $10 = 1 regalo perfecto"
+        ];
+
+        // ========== LOS 4 PRODUCTOS ==========
+        const products = [
+            {
+                id: 1,
+                name: "💖 LovePage Personalizada",
+                description: "Página web interactiva con vuestra historia de amor, fotos, música y efectos especiales. ¡Incluye mensajes secretos y sorpresas!",
+                price: PRODUCT_PRICE,
+                image: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "🎮 Juego del Amor",
+                description: "Juego interactivo personalizado con preguntas sobre vuestra relación, retos divertidos y momentos especiales. ¡Diversión garantizada!",
+                price: PRODUCT_PRICE,
+                image: "https://images.unsplash.com/photo-1540655037524-8a4c5665e2e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "✨ Línea de Tiempo Mágica",
+                description: "Línea de tiempo interactiva con todos vuestros momentos especiales, desde el primer día hasta hoy. ¡Incluye fotos y anécdotas!",
+                price: PRODUCT_PRICE,
+                image: "https://images.unsplash.com/photo-1511984804822-e16ba72f5840?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "💌 Carta Digital Animada",
+                description: "Carta de amor con efectos mágicos que se revela poco a poco. Incluye animaciones, música y sorpresas interactivas. ¡Emoción garantizada!",
+                price: PRODUCT_PRICE,
+                image: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // ========== EFECTOS VISUALES ==========
+        function createFloatingHearts() {
+            const container = document.getElementById('floating-hearts');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = getRandomHeart();
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDelay = `${Math.random() * 20}s`;
+                heart.style.animationDuration = `${15 + Math.random() * 15}s`;
+                heart.style.fontSize = `${20 + Math.random() * 30}px`;
+                heart.style.opacity = '0.6';
+                container.appendChild(heart);
+            }
+        }
+
+        function getRandomHeart() {
+            const hearts = ['💖', '💝', '💘', '💗', '💓', '💞', '💕'];
+            return hearts[Math.floor(Math.random() * hearts.length)];
+        }
+
+        function createLoveBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'love-bubble';
+            bubble.style.cssText = `
+                position: fixed;
+                background: white;
+                border-radius: 50%;
+                box-shadow: 0 5px 20px rgba(255, 64, 129, 0.2);
+                padding: 15px;
+                font-size: 20px;
+                z-index: 9998;
+                opacity: 0;
+                pointer-events: none;
+                animation: bubbleFloat 6s ease-in-out forwards;
+            `;
+            
+            bubble.innerHTML = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            bubble.style.left = `${Math.random() * 80 + 10}vw`;
+            bubble.style.fontSize = `${14 + Math.random() * 20}px`;
+            bubble.style.color = getRandomColor();
+            document.body.appendChild(bubble);
+            
+            setTimeout(() => {
+                bubble.remove();
+            }, 6000);
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff4081', '#f50057', '#ff80ab', '#880e4f'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = `${Math.random() * 100}vh`;
+                confetti.style.background = getRandomColor();
+                confetti.style.opacity = '0.8';
+                document.body.appendChild(confetti);
+                
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${360 + Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 2000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // ========== CARGAR PRODUCTOS ==========
+        function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            <div class="price">${product.price}</div>
+                            <button class="buy-now-btn" onclick="buyProduct(${product.id})">
+                                <i class="fas fa-heart"></i> COMPRAR POR $10
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        // ========== FUNCIÓN DE COMPRA ==========
+        function buyProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                createConfetti();
+                
+                // Crear mensaje para WhatsApp
+                const message = `¡Hola! Me interesa comprar el regalo: ${product.name} por $10. ¿Podrías ayudarme?`;
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Mostrar alerta
+                showLoveAlert(`💝 ¡Perfecto! Te llevaré a WhatsApp para comprar: ${product.name}`);
+                
+                // Redirigir a WhatsApp después de 1.5 segundos
+                setTimeout(() => {
+                    window.open(`https://wa.me/593${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+                }, 1500);
+            }
+        }
+
+        // ========== ALERTAS ==========
+        function showLoveAlert(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, var(--primary), var(--accent));
+                color: white;
+                padding: 20px 30px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(255, 64, 129, 0.4);
+                z-index: 9999;
+                animation: slideInLeft 0.5s ease-out;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                max-width: 400px;
+            `;
+            alertDiv.innerHTML = `
+                <i class="fas fa-heart" style="font-size: 1.5rem;"></i>
+                <div>
+                    <div style="font-weight: bold; font-size: 1.1rem;">¡Excelente elección!</div>
+                    <div>${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOut 0.5s ease-out forwards';
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 3000);
+        }
+
+        // ========== INICIALIZACIÓN ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingHearts();
+            loadProducts();
+            
+            // Efectos aleatorios
+            setInterval(createLoveBubble, 10000);
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+                    showLoveAlert(randomMessage);
+                }
+            }, 20000);
+            
+            // Efecto de bienvenida
+            setTimeout(() => {
+                showLoveAlert('🎁 ¡Bienvenido! Todos los regalos por solo $10');
+            }, 2000);
+        });
+
+        // Añadir animación CSS adicional
+        const style = document.createElement('style');
+        style.textContent = `
+            .love-bubble {
+                position: fixed;
+                background: white;
+                border-radius: 50%;
+                box-shadow: 0 5px 20px rgba(255, 64, 129, 0.2);
+                padding: 15px;
+                font-size: 24px;
+                z-index: 9998;
+                opacity: 0;
+                pointer-events: none;
+                animation: bubbleFloat 6s ease-in-out forwards;
+            }
+            
+            @keyframes bubbleFloat {
+                0% {
+                    transform: translateY(100vh) scale(0);
+                    opacity: 0;
+                }
+                20% {
+                    opacity: 1;
+                    transform: translateY(80vh) scale(1);
+                }
+                80% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100px) scale(0.5);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            .price::before {
+                content: "$";
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
