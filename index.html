@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>💝 LoveBox - Regalos Digitales por $10</title>
+    <title>💝 LoveBox - Regalos Digitales</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -16,7 +16,7 @@
 
     <!-- BANNER PROMOCIONAL -->
     <div class="promo-banner">
-      <span>🔥 ¡4 REGALOS ESPECIALES POR SOLO $10 CADA UNO! 🔥</span>
+      <span>🔥 ¡4 REGALOS ESPECIALES POR SOLO $9 CADA UNO! 🔥</span>
     </div>
 
     <!-- HEADER -->
@@ -35,14 +35,14 @@
     <!-- HERO SECTION -->
     <section class="hero">
       <div class="hero-content">
-        <h2>¡Sorprende a tu amor <span>por solo $10</span>! ✨</h2>
+        <h2>¡Sorprende a tu amor <span>por solo $9 </span>!</h2>
         <p>
           Crea momentos inolvidables con regalos digitales personalizados.
           Perfectos para San Valentín, aniversarios o simplemente porque sí.
         </p>
 
         <div class="hero-highlight">
-          <i class="fas fa-star"></i> ¡CADA REGALO SOLO $10!
+          <i class="fas fa-star"></i> ¡CADA REGALO SOLO $9!
           <i class="fas fa-star"></i>
         </div>
 
@@ -64,6 +64,58 @@
         <!-- Los 4 productos se cargan dinámicamente -->
       </div>
     </section>
+
+    <!-- MODAL DE DETALLES DEL PRODUCTO -->
+    <div class="modal" id="product-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">
+            <i class="fas fa-heart"></i> Detalles del Regalo
+          </h3>
+          <button class="close-modal" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-video" id="modal-video">
+            <!-- Video será insertado aquí -->
+          </div>
+          <div class="modal-info">
+            <div class="modal-description" id="modal-description"></div>
+
+            <div class="modal-features">
+              <h4><i class="fas fa-star"></i> ¿Qué incluye?</h4>
+              <ul id="modal-features"></ul>
+            </div>
+
+            <div class="modal-features">
+              <h4><i class="fas fa-gift"></i> ¿Por qué es especial?</h4>
+              <ul id="modal-benefits"></ul>
+            </div>
+
+            <div class="modal-price-section">
+              <div class="modal-price">$<span id="modal-price">9</span></div>
+              <p style="color: #666; margin-bottom: 20px">
+                ¡Precio especial por tiempo limitado!
+              </p>
+
+              <div class="modal-actions">
+                <button class="modal-buy-btn" id="modal-buy-btn">
+                  <i class="fas fa-heart"></i> COMPRAR AHORA
+                </button>
+                <a
+                  href="https://wa.me/593993531735"
+                  target="_blank"
+                  class="modal-whatsapp-btn"
+                >
+                  <i class="fab fa-whatsapp"></i> PREGUNTAR POR WHATSAPP
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- WHATSAPP SECTION -->
     <section class="whatsapp-section">
@@ -114,7 +166,7 @@
       <div class="testimonial-slider">
         <div class="testimonial">
           <div class="testimonial-content">
-            "¡La LovePage personalizada fue increíble! Por solo $10 hice el
+            "¡La LovePage personalizada fue increíble! Por solo $9 hice el
             regalo más especial del mundo. Mi novia lloró de la emoción cuando
             la vio."
           </div>
@@ -134,7 +186,7 @@
         <div class="testimonial">
           <div class="testimonial-content">
             "El Juego del Amor fue perfecto para nuestro aniversario. Nos reímos
-            mucho y descubrimos cosas nuevas el uno del otro. ¡Por solo $10!"
+            mucho y descubrimos cosas nuevas el uno del otro. ¡Por solo $9!"
           </div>
           <div class="testimonial-author">
             <div class="author-avatar">MA</div>
@@ -154,7 +206,7 @@
       <div class="footer-content">
         <div class="footer-hearts">💝 💝 💝</div>
         <h2 style="margin-bottom: 20px">
-          ¡No esperes más para demostrar tu amor!
+          ¡No esperas más para demostrar tu amor!
         </h2>
         <p style="margin-bottom: 20px; font-size: 1.1rem">
           Cada regalo digital es único, personalizado y creado con amor.
@@ -186,8 +238,7 @@
             font-size: 0.9rem;
           "
         >
-          © 2024 LoveBox Digital - Todos los regalos a $10<br />
-          WhatsApp: 0993531735 - ¡Haz tu pedido ahora!
+          © 2026 LoveBox Digital -¡Haz tu pedido ahora! <br />
         </p>
       </div>
     </footer>
@@ -195,15 +246,15 @@
     <script>
       // ========== CONFIGURACIÓN ==========
       const WHATSAPP_NUMBER = "0993531735";
-      const PRODUCT_PRICE = 10;
+      const PRODUCT_PRICE = 9;
       let loveMessages = [
-        "💖 ¡Cada regalo solo $10!",
-        "💖 ¡LovePage solo $15!",
+        "💖 ¡Cada regalo solo $9!",
+        "💖 ¡LovePage solo $9!",
         "✨ Demuestra tu amor sin gastar mucho",
         "🌹 El amor verdadero no tiene precio, ¡pero nuestros regalos sí!",
-        "💌 Por solo $10 puedes hacer feliz a tu pareja",
+        "💌 Por solo $9 puedes hacer feliz a tu pareja",
         "🎁 ¡La mejor inversión en amor!",
-        "🌟 $10 = 1 regalo perfecto",
+        "🌟 $9 = 1 regalo perfecto",
       ];
 
       // ========== LOS 4 PRODUCTOS ==========
@@ -213,7 +264,7 @@
           name: "💖 LovePage Personalizada",
           description:
             "Página web interactiva con vuestra historia de amor, fotos, música y efectos especiales. ¡Incluye mensajes secretos y sorpresas!",
-          price: 15,
+          price: PRODUCT_PRICE,
           image:
             "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         },
@@ -223,7 +274,8 @@
           description:
             "Juego interactivo personalizado con preguntas sobre vuestra relación, retos divertidos y momentos especiales. ¡Diversión garantizada!",
           price: PRODUCT_PRICE,
-          image: "img/inter.png",
+          image:
+            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         },
         {
           id: 3,
@@ -232,7 +284,7 @@
             "Línea de tiempo interactiva con todos vuestros momentos especiales, desde el primer día hasta hoy. ¡Incluye fotos y anécdotas!",
           price: PRODUCT_PRICE,
           image:
-            "img/linea.png",
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         },
         {
           id: 4,
@@ -244,6 +296,83 @@
             "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         },
       ];
+
+      // ========== DETALLES COMPLETOS DE LOS PRODUCTOS ==========
+      const productDetails = {
+        1: {
+          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Cambia esta URL por tu video real
+          fullDescription:
+            "Una página web completamente personalizable diseñada especialmente para San Valentín, donde puedes crear una experiencia digital única para tu pareja. No es solo una página web, es un recuerdo digital eterno que captura los momentos más especiales de su amor.",
+          features: [
+            "Galería de fotos interactiva con efectos personalizada",
+            "Línea de tiempo de vuestra relación",
+            "Música de fondo personalizada",
+            "Efectos visuales especiales y animaciones",
+            "Compatible con todos los dispositivos",
+            "Entrega en 24 horas después de la aprobación",
+          ],
+          benefits: [
+            "Sorprende a tu pareja de forma única e innovadora",
+            "Accesible desde cualquier dispositivo móvil o computadora",
+            "Recuerdo digital que dura para siempre",
+            "Fácil de compartir con familiares y amigos",
+            "Precio inmejorable por tanta calidad y dedicación",
+          ],
+        },
+        2: {
+          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          fullDescription:
+            "Un juego interactivo diseñado especialmente para parejas que buscan diversión y conexión. Incluye preguntas divertidas sobre vuestra relación para fortalecer vuestro vínculo. Ideal para noches de pareja o momentos especiales.",
+          features: [
+            " 4 preguntas personalizadas sobre vuestra relación y editadas por ti",
+            "Sistema de puntuación para hacerlo competitivo",
+            "Compatible con móvil, tablet y computadora",
+            "Interfaz intuitiva y amigable",
+          ],
+          benefits: [
+            "Diversión garantizada para ambos",
+            "Fortalece la comunicación y conexión en pareja",
+            "Crea nuevos recuerdos y experiencias juntos",
+            "Perfecto para noches de pareja o citas especiales",
+            "Siempre disponible cuando lo necesitéis",
+          ],
+        },
+        3: {
+          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          fullDescription:
+            "Una línea de tiempo interactiva que recorre todos los momentos especiales de vuestra relación, desde el primer día hasta hoy. Con fotos, videos, anécdotas y fechas importantes organizadas de forma visual y emocionante.",
+          features: [
+            "Cronología completa de vuestra historia de amor",
+            "Fotos organizadas por fechas y eventos",
+            "Anécdotas y momentos especiales documentados",
+            "Marcadores importantes (primer beso, primer viaje, etc.)",
+            "Navegación intuitiva y fácil de usar",
+          ],
+          benefits: [
+            "Revive los mejores momentos de vuestra relación",
+            "Organiza todos vuestros recuerdos en un solo lugar",
+            "Sorprende en aniversarios y fechas especiales",
+            "Presentación profesional y emocionante",
+          ],
+        },
+        4: {
+          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          fullDescription:
+            "Es una experiencia interactiva única de San Valentín que combina magia digital, romanticismo y tecnología para crear una declaración de amor inolvidable. No es solo una carta, es un espectáculo visual y emocional que transforma un simple mensaje en una aventura romántica interactiva.",
+          features: [
+            "Sobre Mágico Interactivo",
+            "Carta Revelada con Efectos Especiales",
+            "Efectos Automáticos al Abrir"
+          ],
+          benefits: [
+            "Emoción garantizada al recibirla",
+            "Más impactante que una carta tradicional",
+            "Se puede enviar en cualquier momento y lugar",
+            "Perfecta para declaraciones de amor importantes",
+            "Recuerdo que guardará para siempre en su corazón",
+          ],
+        },
+      };
 
       // ========== EFECTOS VISUALES ==========
       function createFloatingHearts() {
@@ -343,14 +472,70 @@
                         <p class="product-description">${product.description}</p>
                         <div class="product-price">
                             <div class="price">${product.price}</div>
-                            <button class="buy-now-btn" onclick="buyProduct(${product.id})">
-                                <i class="fas fa-heart"></i> COMPRAR POR $10
-                            </button>
+                            <div class="product-buttons">
+                                <button class="view-details-btn" onclick="showProductDetails(${product.id})">
+                                    <i class="fas fa-eye"></i> VER DETALLE
+                                </button>
+                                <button class="buy-now-btn" onclick="buyProduct(${product.id})">
+                                    <i class="fas fa-heart"></i> COMPRAR
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
           grid.appendChild(productCard);
         });
+      }
+
+      // ========== FUNCIONES DEL MODAL ==========
+      function showProductDetails(productId) {
+        const product = products.find((p) => p.id === productId);
+        const details = productDetails[productId];
+
+        if (!product || !details) return;
+
+        // Actualizar contenido del modal
+        document.getElementById("modal-title").innerHTML =
+          `<i class="fas fa-heart"></i> ${product.name}`;
+        document.getElementById("modal-video").innerHTML =
+          `<iframe src="${details.videoUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        document.getElementById("modal-description").textContent =
+          details.fullDescription;
+        document.getElementById("modal-price").textContent = product.price;
+
+        // Actualizar características
+        const featuresList = document.getElementById("modal-features");
+        featuresList.innerHTML = details.features
+          .map((feature) => `<li><i class="fas fa-check"></i> ${feature}</li>`)
+          .join("");
+
+        // Actualizar beneficios
+        const benefitsList = document.getElementById("modal-benefits");
+        benefitsList.innerHTML = details.benefits
+          .map((benefit) => `<li><i class="fas fa-heart"></i> ${benefit}</li>`)
+          .join("");
+
+        // Actualizar botón de compra
+        document.getElementById("modal-buy-btn").onclick = () =>
+          buyProduct(productId);
+
+        // Mostrar modal
+        document.getElementById("product-modal").style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevenir scroll
+
+        // Crear efecto de confetti
+        createConfetti();
+      }
+
+      function closeModal() {
+        document.getElementById("product-modal").style.display = "none";
+        document.body.style.overflow = "auto";
+
+        // Pausar el video
+        const iframe = document.querySelector("#modal-video iframe");
+        if (iframe) {
+          iframe.src = iframe.src; // Reiniciar el video
+        }
       }
 
       // ========== FUNCIÓN DE COMPRA ==========
@@ -360,7 +545,7 @@
           createConfetti();
 
           // Crear mensaje para WhatsApp
-          const message = `¡Hola! Me interesa comprar el regalo: ${product.name} por $10. ¿Podrías ayudarme?`;
+          const message = `¡Hola! Me interesa comprar el regalo: ${product.name} por $9. ¿Podrías ayudarme?`;
           const encodedMessage = encodeURIComponent(message);
 
           // Mostrar alerta
@@ -418,6 +603,21 @@
         createFloatingHearts();
         loadProducts();
 
+        // Configurar cierre del modal
+        const modal = document.getElementById("product-modal");
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        // Cerrar con ESC
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && modal.style.display === "block") {
+            closeModal();
+          }
+        });
+
         // Efectos aleatorios
         setInterval(createLoveBubble, 10000);
         setInterval(() => {
@@ -430,7 +630,7 @@
 
         // Efecto de bienvenida
         setTimeout(() => {
-          showLoveAlert("🎁 ¡Bienvenido! Todos los regalos por solo $10");
+          showLoveAlert("🎁 ¡Bienvenido! Todos los regalos por solo $9");
         }, 2000);
       });
 
@@ -471,10 +671,6 @@
             @keyframes slideOut {
                 from { transform: translateX(0); opacity: 1; }
                 to { transform: translateX(100%); opacity: 0; }
-            }
-            
-            .price::before {
-                content: "$";
             }
         `;
       document.head.appendChild(style);
